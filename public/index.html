@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Car Wheel</title>
+
+<style>
+body {
+    background: linear-gradient(135deg, #0f0f1a, #1a1a2e);
+    color: white;
+    font-family: Arial;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+#wheel {
+    margin: 40px auto;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 8px solid gold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    background: radial-gradient(circle, #222, #000);
+    transition: transform 3s ease-out;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.spin-btn {
+    background: gold;
+    color: black;
+}
+
+.coins-btn {
+    background: #444;
+    color: white;
+}
+
+.inventory {
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    background: #1e1e2f;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    width: 130px;
+    box-shadow: 0 0 10px gold;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.admin-btn {
+    opacity: 0.3;
+    font-size: 11px;
+    background: none;
+    color: gray;
+}
+</style>
+</head>
+<body>
+
+<h2 id="coins">Coins: 0</h2>
+
+<div id="wheel">🎯</div>
+
+<button class="spin-btn" onclick="spin()">Крутити</button>
+<button class="coins-btn" onclick="getCoins()">+5 монет</button>
+
+<h3>Інвентар</h3>
+<div class="inventory" id="inventory"></div>
+
+<br>
+<button class="admin-btn" onclick="adminLogin()">Вхід для адмінів</button>
+
+<script>
+
+const wheel = document.getElementById("wheel");
+
+async function loadUser() {
+    const res = await fetch("/user");
+    const data = await res.json();
+    document.getElementById("coins").innerText = "Coins: " + data.coins;
+}
+
+async function spin() {
+
+    wheel.style.transform = "rotate(" + (Math.random()*2000 + 2000) + "deg)";
+
+    const res = await fetch("/spin", { method: "POST" });
+    const data = await res.json();
+
+    if (!data.success) {
+        alert("Немає монет!");
+        return;
+    }
+
+    setTimeout(() => {
+        wheel.innerHTML = data.car.toUpperCase();
+    }, 2800);
+
+    setTimeout(() => {
+        loadUser();
+        loadInventory();
+    }, 3000);
+}
+
+async function getCoins() {
+    const res = await fetch("/get-coins", { method: "POST" });
+    const data = await res.json();
+
+    if (!data.success) {
+        alert("Тільки для адміна!");
+        return;
+    }
+
+    loadUser();
+}
+
+async function loadInventory() {
+    const res = await fetch("/inventory");
+    const data = await res.json();
+
+    const inv = document.getElementById("inventory");
+    inv.innerHTML = "";
+
+    data.forEach(car => {
+        const div = document.createElement("div");
+        div.className = "card";
+
+        div.innerHTML = `
+            <img src="images/${car.name}.jpg">
+            <div>${car.name.toUpperCase()}</div>
+            <div>x${car.count}</div>
+        `;
+
+        inv.appendChild(div);
+    });
+}
+
+async function adminLogin() {
+    const pass = prompt("Введи пароль");
+    const res = await fetch("/admin-login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: pass })
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+        alert("Адмін активований!");
+    } else {
+        alert("Невірний пароль");
+    }
+}
+
+loadUser();
+loadInventory();
+
+</script>
+
+</body>
+</html>

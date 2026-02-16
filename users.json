@@ -1,0 +1,170 @@
+{
+  "1771016609202": {
+    "balance": 0,
+    "lastClaim": 1771016644053,
+    "inventory": {
+      "Ford": {
+        "count": 2,
+        "rarity": "common"
+      },
+      "Mercedes": {
+        "count": 8,
+        "rarity": "common"
+      },
+      "Chevrolet": {
+        "count": 4,
+        "rarity": "common"
+      },
+      "Honda": {
+        "count": 3,
+        "rarity": "common"
+      },
+      "Kia": {
+        "count": 1,
+        "rarity": "common"
+      },
+      "Subaru": {
+        "count": 6,
+        "rarity": "common"
+      },
+      "Nissan": {
+        "count": 4,
+        "rarity": "common"
+      },
+      "Mazda": {
+        "count": 2,
+        "rarity": "common"
+      },
+      "Toyota": {
+        "count": 4,
+        "rarity": "common"
+      },
+      "Hyundai": {
+        "count": 1,
+        "rarity": "common"
+      }
+    },
+    "admin": true
+  },
+  "1771016674282": {
+    "balance": 0,
+    "lastClaim": 1771016680421,
+    "inventory": {
+      "Toyota": {
+        "count": 1,
+        "rarity": "common"
+      }
+    },
+    "admin": false
+  },
+  "1771016683492": {
+    "balance": 0,
+    "lastClaim": 1771178594130,
+    "inventory": {
+      "Kia": {
+        "count": 2,
+        "rarity": "common"
+      },
+      "Hyundai": {
+        "count": 1,
+        "rarity": "common"
+      },
+      "Nissan": {
+        "count": 1,
+        "rarity": "common"
+      },
+      "Subaru": {
+        "count": 2,
+        "rarity": "common"
+      },
+      "Mercedes": {
+        "count": 2,
+        "rarity": "common"
+      },
+      "Honda": {
+        "count": 1,
+        "rarity": "common"
+      }
+    },
+    "admin": true
+  },
+  "1771178599964": {
+    "balance": 0,
+    "lastClaim": 0,
+    "inventory": {},
+    "admin": false
+  },
+  "1771179003986": {
+    "balance": 0,
+    "lastClaim": 1771179006437,
+    "inventory": {
+      "Mazda": {
+        "count": 1,
+        "rarity": "common"
+      }
+    },
+    "admin": false
+  },
+  "1771179009423": {
+    "balance": 10,
+    "lastClaim": 1771179019285,
+    "inventory": {
+      "Ford": {
+        "count": 1,
+        "rarity": "common"
+      },
+      "Honda": {
+        "count": 1,
+        "rarity": "common"
+      },
+      "Kia": {
+        "count": 1,
+        "rarity": "common"
+      },
+      "Mazda": {
+        "count": 1,
+        "rarity": "common"
+      },
+      "Audi": {
+        "count": 1,
+        "rarity": "mythic"
+      },
+      "Subaru": {
+        "count": 1,
+        "rarity": "common"
+      },
+      "Mercedes": {
+        "count": 1,
+        "rarity": "common"
+      },
+      "Nissan": {
+        "count": 1,
+        "rarity": "common"
+      }
+    },
+    "admin": true
+  },
+  "1771179025772": {
+    "balance": 0,
+    "lastClaim": 0,
+    "inventory": {},
+    "admin": false
+  },
+  "1771179333232": {
+    "balance": 0,
+    "lastClaim": 1771179334943,
+    "inventory": {
+      "Mercedes": {
+        "count": 1,
+        "rarity": "common"
+      }
+    },
+    "admin": false
+  },
+  "1771179337658": {
+    "balance": 0,
+    "lastClaim": 0,
+    "inventory": {},
+    "admin": false
+  }
+}
