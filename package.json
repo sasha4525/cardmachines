@@ -17,9 +17,3 @@
     "sqlite3": "^5.1.7"
   }
 }
-{
-  ...
-  "private": true,
-  "proxy": "http://localhost:3000",
-  ...
-}
