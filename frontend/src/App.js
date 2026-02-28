@@ -12,62 +12,84 @@ function App() {
   }, []);
 
   const loadUser = async () => {
-    const res = await fetch("/user");
-    const data = await res.json();
-    setCoins(data.coins);
+    try {
+      const res = await fetch("/user");
+      const data = await res.json();
+      setCoins(data.coins);
+    } catch (err) {
+      console.log("Server error:", err);
+    }
   };
 
   const loadInventory = async () => {
-    const res = await fetch("/inventory");
-    const data = await res.json();
-    setInventory(data);
+    try {
+      const res = await fetch("/inventory");
+      const data = await res.json();
+      setInventory(data);
+    } catch (err) {
+      console.log("Inventory error:", err);
+    }
   };
 
   const spin = async () => {
+    try {
+      const res = await fetch("/spin", { method: "POST" });
+      const data = await res.json();
 
-    const res = await fetch("/spin", { method: "POST" });
-    const data = await res.json();
+      if (!data.success) {
+        alert("Немає монет!");
+        return;
+      }
 
-    if (!data.success) {
-      alert("Немає монет!");
-      return;
+      setWheelText("?? Крутиться...");
+
+      setTimeout(() => {
+        setWheelText(data.car.toUpperCase());
+        loadUser();
+        loadInventory();
+      }, 1500);
+
+    } catch (err) {
+      console.log("Spin error:", err);
     }
-
-    setWheelText("?? Крутиться...");
-
-    setTimeout(() => {
-      setWheelText(data.car.toUpperCase());
-      loadUser();
-      loadInventory();
-    }, 1500);
   };
 
   const getCoins = async () => {
-    const res = await fetch("/get-coins", { method: "POST" });
-    const data = await res.json();
+    try {
+      const res = await fetch("/get-coins", { method: "POST" });
+      const data = await res.json();
 
-    if (!data.success) {
-      alert("Тільки для адміна!");
-      return;
+      if (!data.success) {
+        alert("Тільки для адміна!");
+        return;
+      }
+
+      loadUser();
+    } catch (err) {
+      console.log("Coins error:", err);
     }
-
-    loadUser();
   };
 
   const adminLogin = async () => {
     const pass = prompt("Введи пароль");
-    const res = await fetch("/admin-login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password: pass })
-    });
 
-    const data = await res.json();
+    try {
+      const res = await fetch("/admin-login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: pass })
+      });
 
-    if (data.success) {
-      alert("Адмін активований!");
-    } else {
-      alert("Невірний пароль");
+      const data = await res.json();
+
+      if (data.success) {
+        alert("Адмін активований!");
+      } else {
+        alert("Невірний пароль");
+      }
+
+    } catch (err) {
+      console.log("Admin error:", err);
     }
   };
 
